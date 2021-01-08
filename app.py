@@ -11,11 +11,9 @@ def home():
     if request.method=='POST':
         user_input = request.form.get('review_text')
         print(user_input)
-        if len(user_input) == 0:
-            pred1 = pred2 = 'Please Enter your review'
-        else:
-            pred1, pred2  = afr.predictText(user_input)
-            print(pred1, pred2)
+        user_input = afr.clean_text(user_input)
+        pred1, pred2  = afr.predictText(user_input)
+        print(pred1, pred2)
     return render_template('index.html', pred1=pred1, pred2 = pred2)
 
 if __name__ == '__main__':
